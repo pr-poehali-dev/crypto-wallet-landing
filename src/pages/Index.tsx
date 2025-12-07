@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LoginPage } from '@/components/LoginPage';
 import { Dashboard } from '@/components/Dashboard';
 
-export type Page = 'home' | 'send' | 'receive' | 'settings' | 'exchange' | 'buy' | 'sell';
+export type Page = 'home' | 'send' | 'receive' | 'settings' | 'exchange' | 'buy' | 'sell' | 'staking' | 'nft' | 'defi' | 'qr' | 'price-history' | 'converter' | 'alerts' | 'referral';
 
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

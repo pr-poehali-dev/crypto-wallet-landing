@@ -12,6 +12,14 @@ import { SettingsPage } from '@/components/SettingsPage';
 import { ExchangePage } from '@/components/ExchangePage';
 import { BuyPage } from '@/components/BuyPage';
 import { SellPage } from '@/components/SellPage';
+import { StakingPage } from '@/components/StakingPage';
+import { NFTPage } from '@/components/NFTPage';
+import { DeFiPage } from '@/components/DeFiPage';
+import { QRScannerPage } from '@/components/QRScannerPage';
+import { PriceHistoryPage } from '@/components/PriceHistoryPage';
+import { ConverterPage } from '@/components/ConverterPage';
+import { AlertsPage } from '@/components/AlertsPage';
+import { ReferralPage } from '@/components/ReferralPage';
 import type { Page } from '@/pages/Index';
 
 interface DashboardProps {
@@ -61,6 +69,14 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
         {currentPage === 'exchange' && <ExchangePage />}
         {currentPage === 'buy' && <BuyPage />}
         {currentPage === 'sell' && <SellPage />}
+        {currentPage === 'staking' && <StakingPage />}
+        {currentPage === 'nft' && <NFTPage />}
+        {currentPage === 'defi' && <DeFiPage />}
+        {currentPage === 'qr' && <QRScannerPage />}
+        {currentPage === 'price-history' && <PriceHistoryPage />}
+        {currentPage === 'converter' && <ConverterPage />}
+        {currentPage === 'alerts' && <AlertsPage />}
+        {currentPage === 'referral' && <ReferralPage />}
         
         {currentPage === 'home' && (
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 sm:space-y-6">
@@ -134,6 +150,56 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
 
             <CryptoChart />
 
+            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('staking')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="TrendingUp" size={18} />
+                    Стейкинг
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">Доход 8.5%</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('nft')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="Image" size={18} />
+                    NFT
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">6 токенов</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('defi')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="Network" size={18} />
+                    DeFi
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">2 протокола</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('qr')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="QrCode" size={18} />
+                    QR
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">Сканер</p>
+                </CardContent>
+              </Card>
+            </div>
+
             <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               <Card className="border-border/50 bg-card/80 backdrop-blur">
                 <CardHeader>
@@ -183,6 +249,78 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
                     className="w-full border-destructive text-destructive hover:bg-destructive hover:text-white"
                   >
                     Продать крипту
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="LineChart" size={20} />
+                    История
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={() => onPageChange('price-history')}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    Графики цен
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Calculator" size={20} />
+                    Калькулятор
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={() => onPageChange('converter')}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    Конвертер
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Bell" size={20} />
+                    Алерты
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={() => onPageChange('alerts')}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    Настроить
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Users" size={20} />
+                    Реферал
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={() => onPageChange('referral')}
+                    variant="outline"
+                    className="w-full border-success text-success hover:bg-success hover:text-white"
+                  >
+                    +$175
                   </Button>
                 </CardContent>
               </Card>
