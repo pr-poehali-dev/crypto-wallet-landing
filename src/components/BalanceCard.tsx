@@ -44,48 +44,48 @@ export const BalanceCard = () => {
           Общий баланс
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4">
         <div>
-          <div className="text-5xl font-bold mb-2">
+          <div className="text-3xl sm:text-5xl font-bold mb-2 break-all">
             ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Icon name="TrendingUp" size={14} className="text-success" />
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Icon name="TrendingUp" size={12} className="text-success sm:w-3.5 sm:h-3.5" />
             <span>+2.47% за 24ч</span>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-border/50">
+        <div className="pt-3 sm:pt-4 border-t border-border/50">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                <span className="text-lg font-semibold text-secondary">$</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                <span className="text-base sm:text-lg font-semibold text-secondary">$</span>
               </div>
               <div>
-                <p className="font-semibold">USDC</p>
-                <p className="text-sm text-muted-foreground">USD Coin</p>
+                <p className="text-sm sm:text-base font-semibold">USDC</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">USD Coin</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="font-semibold">{usdcBalance.toLocaleString('en-US')}</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm sm:text-base font-semibold break-all">{usdcBalance.toLocaleString('en-US')}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 ${(usdcBalance * usdcPrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </p>
-              <p className="text-xs text-muted-foreground/70 mt-0.5">
+              <p className="text-[10px] sm:text-xs text-muted-foreground/70 mt-0.5">
                 ≈{(usdcBalance * usdcPrice * usdToRub).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ₽
               </p>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 pt-2">
-          <div className="p-3 rounded-lg bg-muted/30 border border-border/30">
-            <p className="text-xs text-muted-foreground mb-1">Цена USDC</p>
-            <p className="font-semibold">${usdcPrice.toFixed(4)}</p>
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-2">
+          <div className="p-2 sm:p-3 rounded-lg bg-muted/30 border border-border/30">
+            <p className="text-[10px] sm:text-xs text-muted-foreground mb-1">Цена USDC</p>
+            <p className="text-sm sm:text-base font-semibold">${usdcPrice.toFixed(4)}</p>
           </div>
-          <div className="p-3 rounded-lg bg-muted/30 border border-border/30">
-            <p className="text-xs text-muted-foreground mb-1">Обновлено</p>
-            <p className="font-semibold text-xs">Сейчас</p>
+          <div className="p-2 sm:p-3 rounded-lg bg-muted/30 border border-border/30">
+            <p className="text-[10px] sm:text-xs text-muted-foreground mb-1">Обновлено</p>
+            <p className="text-sm sm:text-base font-semibold">Сейчас</p>
           </div>
         </div>
       </CardContent>

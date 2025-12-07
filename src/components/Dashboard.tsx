@@ -25,36 +25,36 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border/50 bg-card/50 backdrop-blur sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => onPageChange('home')}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity"
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <Icon name="Wallet" size={20} className="text-white" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <Icon name="Wallet" size={18} className="text-white sm:w-5 sm:h-5" />
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   TrueBlockWall
                 </h1>
-                <p className="text-xs text-muted-foreground">M.Kozlov@techglobal.ru</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">M.Kozlov@techglobal.ru</p>
               </div>
             </button>
             
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon">
-                <Icon name="Bell" size={20} />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                <Icon name="Bell" size={18} className="sm:w-5 sm:h-5" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => onPageChange('settings')}>
-                <Icon name="Settings" size={20} />
+              <Button variant="ghost" size="icon" onClick={() => onPageChange('settings')} className="h-8 w-8 sm:h-10 sm:w-10">
+                <Icon name="Settings" size={18} className="sm:w-5 sm:h-5" />
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6 pb-24">
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pb-20 sm:pb-24">
         {currentPage === 'send' && <SendPage />}
         {currentPage === 'receive' && <ReceivePage />}
         {currentPage === 'settings' && <SettingsPage />}
@@ -63,26 +63,29 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
         {currentPage === 'sell' && <SellPage />}
         
         {currentPage === 'home' && (
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-            <TabsList className="bg-muted/50">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                <Icon name="LayoutDashboard" size={16} className="mr-2" />
-                Обзор
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 sm:space-y-6">
+            <TabsList className="bg-muted/50 w-full grid grid-cols-3 h-auto">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2 sm:py-2.5">
+                <Icon name="LayoutDashboard" size={14} className="mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Обзор</span>
+                <span className="sm:hidden">Обзор</span>
               </TabsTrigger>
-              <TabsTrigger value="transactions" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                <Icon name="ArrowLeftRight" size={16} className="mr-2" />
-                Транзакции
+              <TabsTrigger value="transactions" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2 sm:py-2.5">
+                <Icon name="ArrowLeftRight" size={14} className="mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Транзакции</span>
+                <span className="sm:hidden">История</span>
               </TabsTrigger>
-              <TabsTrigger value="markets" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                <Icon name="TrendingUp" size={16} className="mr-2" />
-                Рынки
+              <TabsTrigger value="markets" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2 sm:py-2.5">
+                <Icon name="TrendingUp" size={14} className="mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Рынки</span>
+                <span className="sm:hidden">Рынок</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="overview" className="space-y-6">
+            <TabsContent value="overview" className="space-y-4 sm:space-y-6">
             <BalanceCard />
             
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               <Card className="border-border/50 bg-card/80 backdrop-blur">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -131,7 +134,7 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
 
             <CryptoChart />
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               <Card className="border-border/50 bg-card/80 backdrop-blur">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -204,47 +207,47 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
         )}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur border-t border-border/50 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-around py-3">
+      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur border-t border-border/50 z-50 safe-area-bottom">
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="flex items-center justify-around py-2 sm:py-3">
             <button
               onClick={() => onPageChange('home')}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors ${
                 currentPage === 'home' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Icon name="Home" size={24} />
-              <span className="text-xs font-medium">Главная</span>
+              <Icon name="Home" size={20} className="sm:w-6 sm:h-6" />
+              <span className="text-[10px] sm:text-xs font-medium">Главная</span>
             </button>
 
             <button
               onClick={() => onPageChange('send')}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors ${
                 currentPage === 'send' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Icon name="Send" size={24} />
-              <span className="text-xs font-medium">Отправить</span>
+              <Icon name="Send" size={20} className="sm:w-6 sm:h-6" />
+              <span className="text-[10px] sm:text-xs font-medium">Отправить</span>
             </button>
 
             <button
               onClick={() => onPageChange('receive')}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors ${
                 currentPage === 'receive' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Icon name="Download" size={24} />
-              <span className="text-xs font-medium">Получить</span>
+              <Icon name="Download" size={20} className="sm:w-6 sm:h-6" />
+              <span className="text-[10px] sm:text-xs font-medium">Получить</span>
             </button>
 
             <button
               onClick={() => onPageChange('settings')}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors ${
                 currentPage === 'settings' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Icon name="Settings" size={24} />
-              <span className="text-xs font-medium">Настройки</span>
+              <Icon name="Settings" size={20} className="sm:w-6 sm:h-6" />
+              <span className="text-[10px] sm:text-xs font-medium">Настройки</span>
             </button>
           </div>
         </div>

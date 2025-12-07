@@ -85,15 +85,15 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-3 sm:p-4">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/20 opacity-50" />
       
       <Card className="w-full max-w-md relative z-10 border-border/50 bg-card/95 backdrop-blur">
-        <CardHeader className="space-y-3 text-center">
-          <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-2">
-            <Icon name="Wallet" size={32} className="text-white" />
+        <CardHeader className="space-y-2 sm:space-y-3 text-center">
+          <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-1 sm:mb-2">
+            <Icon name="Wallet" size={24} className="text-white sm:w-8 sm:h-8" />
           </div>
-          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <CardTitle className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             TrueBlockWall
           </CardTitle>
           <CardDescription className="text-muted-foreground">

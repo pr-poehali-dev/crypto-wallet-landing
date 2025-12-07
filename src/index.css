@@ -54,6 +54,8 @@
       BlinkMacSystemFont,
       "Segoe UI",
       sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -63,5 +65,17 @@
   h5,
   h6 {
     @apply font-semibold;
+  }
+}
+
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .safe-area-bottom {
+      padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+    }
   }
 }

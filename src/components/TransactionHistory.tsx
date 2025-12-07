@@ -136,27 +136,27 @@ export const TransactionHistory = () => {
     .reduce((sum, tx) => sum + (tx.currency === 'USDC' ? tx.amount : 0), 0);
 
   return (
-    <div className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-3">
+    <div className="space-y-3 sm:space-y-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
         <Card className="border-border/50 bg-card/80 backdrop-blur">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
               Всего транзакций
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{transactions.length}</div>
+            <div className="text-2xl sm:text-3xl font-bold">{transactions.length}</div>
           </CardContent>
         </Card>
 
         <Card className="border-border/50 bg-card/80 backdrop-blur">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
               Отправлено (USDC)
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-destructive">
+            <div className="text-xl sm:text-3xl font-bold text-destructive break-all">
               ${totalSent.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </div>
           </CardContent>
@@ -164,12 +164,12 @@ export const TransactionHistory = () => {
 
         <Card className="border-border/50 bg-card/80 backdrop-blur">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">
               Получено (USDC)
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-success">
+            <div className="text-xl sm:text-3xl font-bold text-success break-all">
               ${totalReceived.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </div>
           </CardContent>
@@ -178,14 +178,14 @@ export const TransactionHistory = () => {
 
       <Card className="border-border/50 bg-card/80 backdrop-blur">
         <CardHeader>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <CardTitle className="flex items-center gap-2">
-              <Icon name="History" size={20} />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Icon name="History" size={18} className="sm:w-5 sm:h-5" />
               История транзакций
             </CardTitle>
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <Select value={dateFilter} onValueChange={(value: any) => setDateFilter(value)}>
-                <SelectTrigger className="w-[140px] bg-muted/50 border-border">
+                <SelectTrigger className="w-[120px] sm:w-[140px] bg-muted/50 border-border text-xs sm:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -199,28 +199,28 @@ export const TransactionHistory = () => {
                 placeholder="Поиск..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-muted/50 border-border w-full sm:w-64"
+                className="bg-muted/50 border-border w-full sm:w-64 text-sm"
               />
             </div>
           </div>
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-wrap gap-2 mt-3 sm:mt-4">
             <Badge
               variant={filterType === 'all' ? 'default' : 'outline'}
-              className="cursor-pointer"
+              className="cursor-pointer text-xs sm:text-sm"
               onClick={() => setFilterType('all')}
             >
               Все
             </Badge>
             <Badge
               variant={filterType === 'receive' ? 'default' : 'outline'}
-              className="cursor-pointer"
+              className="cursor-pointer text-xs sm:text-sm"
               onClick={() => setFilterType('receive')}
             >
               Получено
             </Badge>
             <Badge
               variant={filterType === 'send' ? 'default' : 'outline'}
-              className="cursor-pointer"
+              className="cursor-pointer text-xs sm:text-sm"
               onClick={() => setFilterType('send')}
             >
               Отправлено
@@ -228,7 +228,7 @@ export const TransactionHistory = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2 max-h-[600px] overflow-y-auto">
+          <div className="space-y-2 max-h-[500px] sm:max-h-[600px] overflow-y-auto">
             {filteredTransactions.map((tx) => (
               <div
                 key={tx.id}
