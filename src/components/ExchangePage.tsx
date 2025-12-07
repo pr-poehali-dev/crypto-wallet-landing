@@ -129,7 +129,7 @@ export const ExchangePage = () => {
               </div>
               {prices[fromCurrency] && fromCurrency === 'USDC' && (
                 <p className="text-xs text-muted-foreground">
-                  Баланс: 246,818.42 {fromCurrency} ≈ ${(246818.42 * prices[fromCurrency].price).toLocaleString('ru-RU', { maximumFractionDigits: 2 })}
+                  Баланс: 246,778.19 {fromCurrency} ≈ ${(246778.19 * prices[fromCurrency].price).toLocaleString('ru-RU', { maximumFractionDigits: 2 })}
                 </p>
               )}
               {prices[fromCurrency] && fromCurrency !== 'USDC' && (

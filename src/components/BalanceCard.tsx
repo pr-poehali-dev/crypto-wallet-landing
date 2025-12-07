@@ -5,7 +5,7 @@ import Icon from '@/components/ui/icon';
 export const BalanceCard = () => {
   const [usdcPrice, setUsdcPrice] = useState(1.0);
   const [usdToRub, setUsdToRub] = useState(95.0);
-  const usdcBalance = 246818.42;
+  const usdcBalance = 246778.19;
   const [totalValue, setTotalValue] = useState(usdcBalance);
 
   useEffect(() => {

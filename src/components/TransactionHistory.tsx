@@ -20,35 +20,76 @@ const generateTransactions = (): Transaction[] => {
   const transactions: Transaction[] = [];
   const startDate = new Date('2025-03-06');
   const endDate = new Date('2025-11-11');
-  const currencies = ['USDC'];
+  const currentBalance = 246778.19;
+  const totalReceived = 328335.59;
+  const totalSent = totalReceived - currentBalance;
   
   const currentDate = new Date(startDate);
   let id = 1;
+  let receivedSoFar = 0;
+  let sentSoFar = 0;
+  
+  const tempTransactions: Array<{type: 'send' | 'receive', date: Date}> = [];
 
   while (currentDate <= endDate) {
     const numTransactions = Math.floor(Math.random() * 3) + 1;
     
     for (let i = 0; i < numTransactions; i++) {
       const isReceive = Math.random() > 0.48;
-      const currency = 'USDC';
-      const amount = Math.random() * 8000 + 500;
-
-      transactions.push({
-        id: `tx_${id.toString().padStart(4, '0')}`,
+      tempTransactions.push({
         type: isReceive ? 'receive' : 'send',
-        amount: parseFloat(amount.toFixed(currency === 'BTC' ? 6 : 2)),
-        currency,
-        date: new Date(currentDate),
-        status: 'completed',
-        address: `0x${Math.random().toString(16).substring(2, 10)}...${Math.random().toString(16).substring(2, 6)}`,
-        fee: parseFloat((Math.random() * 5 + 0.5).toFixed(2))
+        date: new Date(currentDate)
       });
-      
-      id++;
     }
     
     currentDate.setDate(currentDate.getDate() + Math.floor(Math.random() * 3) + 1);
   }
+  
+  const receiveCount = tempTransactions.filter(t => t.type === 'receive').length;
+  const sendCount = tempTransactions.filter(t => t.type === 'send').length;
+  
+  tempTransactions.forEach((tempTx, index) => {
+    let amount: number;
+    
+    if (tempTx.type === 'receive') {
+      if (receivedSoFar < totalReceived) {
+        const remaining = totalReceived - receivedSoFar;
+        const receiveTxLeft = receiveCount - tempTransactions.slice(0, index).filter(t => t.type === 'receive').length;
+        const avgAmount = remaining / receiveTxLeft;
+        amount = Math.random() * (avgAmount * 1.5) + (avgAmount * 0.3);
+        if (receivedSoFar + amount > totalReceived) {
+          amount = totalReceived - receivedSoFar;
+        }
+        receivedSoFar += amount;
+      } else {
+        amount = Math.random() * 1000 + 100;
+      }
+    } else {
+      if (sentSoFar < totalSent) {
+        const remaining = totalSent - sentSoFar;
+        const sendTxLeft = sendCount - tempTransactions.slice(0, index).filter(t => t.type === 'send').length;
+        const avgAmount = remaining / sendTxLeft;
+        amount = Math.random() * (avgAmount * 1.5) + (avgAmount * 0.3);
+        if (sentSoFar + amount > totalSent) {
+          amount = totalSent - sentSoFar;
+        }
+        sentSoFar += amount;
+      } else {
+        amount = Math.random() * 800 + 100;
+      }
+    }
+
+    transactions.push({
+      id: `tx_${(id++).toString().padStart(4, '0')}`,
+      type: tempTx.type,
+      amount: parseFloat(amount.toFixed(2)),
+      currency: 'USDC',
+      date: tempTx.date,
+      status: 'completed',
+      address: `0x${Math.random().toString(16).substring(2, 10)}...${Math.random().toString(16).substring(2, 6)}`,
+      fee: parseFloat((Math.random() * 5 + 0.5).toFixed(2))
+    });
+  });
 
   return transactions.sort((a, b) => b.date.getTime() - a.date.getTime());
 };

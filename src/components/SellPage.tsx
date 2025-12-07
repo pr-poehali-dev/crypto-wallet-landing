@@ -22,7 +22,7 @@ export const SellPage = () => {
   const [prices, setPrices] = useState<Record<string, CryptoPrice>>({});
 
   const cryptos = [
-    { symbol: 'USDC', name: 'USD Coin', icon: '💵', balance: '246818.42' },
+    { symbol: 'USDC', name: 'USD Coin', icon: '💵', balance: '246778.19' },
   ];
 
   const withdrawalMethods = [
