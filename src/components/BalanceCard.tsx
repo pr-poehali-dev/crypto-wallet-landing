@@ -149,8 +149,11 @@ export const BalanceCard = () => {
           </div>
         )}
         <div className={isAccountFrozen ? 'opacity-50' : ''}>
-          <div className="text-3xl sm:text-5xl font-bold mb-2 break-all">
+          <div className="text-3xl sm:text-5xl font-bold mb-1 break-all">
             ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </div>
+          <div className="text-xl sm:text-2xl font-semibold text-muted-foreground mb-2">
+            ≈{(totalValue * usdToRub).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ₽
           </div>
           <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
             <Icon name="TrendingUp" size={12} className="text-success sm:w-3.5 sm:h-3.5" />
