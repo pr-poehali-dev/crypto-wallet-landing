@@ -20,6 +20,8 @@ import { PriceHistoryPage } from '@/components/PriceHistoryPage';
 import { ConverterPage } from '@/components/ConverterPage';
 import { AlertsPage } from '@/components/AlertsPage';
 import { ReferralPage } from '@/components/ReferralPage';
+import { ContactsPage } from '@/components/ContactsPage';
+import { NewsPage } from '@/components/NewsPage';
 import type { Page } from '@/pages/Index';
 
 interface DashboardProps {
@@ -51,7 +53,10 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
             </button>
             
             <div className="flex items-center gap-1 sm:gap-2">
-              <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+              <Button variant="ghost" size="icon" onClick={() => onPageChange('news')} className="h-8 w-8 sm:h-10 sm:w-10">
+                <Icon name="Newspaper" size={18} className="sm:w-5 sm:h-5" />
+              </Button>
+              <Button variant="ghost" size="icon" onClick={() => onPageChange('alerts')} className="h-8 w-8 sm:h-10 sm:w-10">
                 <Icon name="Bell" size={18} className="sm:w-5 sm:h-5" />
               </Button>
               <Button variant="ghost" size="icon" onClick={() => onPageChange('settings')} className="h-8 w-8 sm:h-10 sm:w-10">
@@ -77,6 +82,8 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
         {currentPage === 'converter' && <ConverterPage />}
         {currentPage === 'alerts' && <AlertsPage />}
         {currentPage === 'referral' && <ReferralPage />}
+        {currentPage === 'contacts' && <ContactsPage />}
+        {currentPage === 'news' && <NewsPage />}
         
         {currentPage === 'home' && (
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 sm:space-y-6">
@@ -196,6 +203,30 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-muted-foreground">Сканер</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('contacts')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="Users" size={18} />
+                    Контакты
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">5 контактов</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onPageChange('news')}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Icon name="Newspaper" size={18} />
+                    Новости
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">10 новых</p>
                 </CardContent>
               </Card>
             </div>
