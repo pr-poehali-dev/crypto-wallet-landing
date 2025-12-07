@@ -58,51 +58,10 @@ export const BalanceCard = () => {
         : 'from-card via-card to-primary/5'
     }`}>
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-            <Icon name={isAccountFrozen ? "Lock" : "Wallet"} size={16} />
-            {isAccountFrozen ? 'Счет заморожен' : 'Общий баланс'}
-          </CardTitle>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => {
-              if (isAccountFrozen) {
-                const password = prompt('Введите пароль для разморозки:');
-                if (password) {
-                  const storedUsers = localStorage.getItem('users');
-                  let correctPassword = 'Lilia051181!';
-                  
-                  if (storedUsers) {
-                    const users = JSON.parse(storedUsers);
-                    const currentUser = users.find((u: { email: string }) => u.email === 'M.Kozlov@techglobal.ru');
-                    if (currentUser) {
-                      correctPassword = currentUser.password;
-                    }
-                  }
-
-                  if (password === correctPassword) {
-                    localStorage.setItem('accountFrozen', 'false');
-                    setIsAccountFrozen(false);
-                    alert('Счет разморожен');
-                    window.location.reload();
-                  } else {
-                    alert('Неверный пароль');
-                  }
-                }
-              } else {
-                if (confirm('Вы уверены, что хотите заморозить счет?')) {
-                  localStorage.setItem('accountFrozen', 'true');
-                  setIsAccountFrozen(true);
-                  window.location.reload();
-                }
-              }
-            }}
-            className={isAccountFrozen ? 'text-destructive hover:text-destructive' : 'text-muted-foreground hover:text-foreground'}
-          >
-            <Icon name={isAccountFrozen ? "Lock" : "Lock"} size={20} />
-          </Button>
-        </div>
+        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+          <Icon name={isAccountFrozen ? "Lock" : "Wallet"} size={16} />
+          {isAccountFrozen ? 'Счет заморожен' : 'Общий баланс'}
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 sm:space-y-4">
         {isAccountFrozen && (
@@ -149,11 +108,8 @@ export const BalanceCard = () => {
           </div>
         )}
         <div className={isAccountFrozen ? 'opacity-50' : ''}>
-          <div className="text-3xl sm:text-5xl font-bold mb-1 break-all">
+          <div className="text-3xl sm:text-5xl font-bold mb-2 break-all">
             ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </div>
-          <div className="text-xl sm:text-2xl font-semibold text-muted-foreground mb-2">
-            ≈{(totalValue * usdToRub).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ₽
           </div>
           <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
             <Icon name="TrendingUp" size={12} className="text-success sm:w-3.5 sm:h-3.5" />
