@@ -21,6 +21,7 @@ const Index = () => {
     const frozen = localStorage.getItem('accountFrozen');
     if (frozen === 'true') {
       setIsAccountFrozen(true);
+      setShowUnfreezeDialog(true);
     }
   }, []);
 
