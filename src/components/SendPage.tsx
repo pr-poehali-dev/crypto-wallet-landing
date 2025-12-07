@@ -107,19 +107,23 @@ export const SendPage = () => {
           <CardTitle className="text-base">Недавние адреса</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          {[1, 2, 3].map((i) => (
+          {[
+            { name: 'Анна Петрова', address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', avatar: '👩‍💼' },
+            { name: 'Дмитрий Иванов', address: '0x8a9f2c1e4b7d3A51F8C2E9D6B4A7C1E3F5A8B2D4', avatar: '👨‍💻' },
+            { name: 'ООО "ТехГлобал"', address: '0x1c4e5f7a9b2d8c3e6f1a4b7d9c2e5f8a1b4d7c9e', avatar: '🏢' }
+          ].map((contact, i) => (
             <div
               key={i}
               className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/30 cursor-pointer transition-colors"
-              onClick={() => setAddress(`0x${Math.random().toString(16).substring(2, 42)}`)}
+              onClick={() => setAddress(contact.address)}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <Icon name="User" size={20} className="text-white" />
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl">
+                {contact.avatar}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm">Контакт {i}</p>
-                <p className="text-xs text-muted-foreground truncate">
-                  0x{Math.random().toString(16).substring(2, 10)}...
+                <p className="font-semibold text-sm">{contact.name}</p>
+                <p className="text-xs text-muted-foreground truncate font-mono">
+                  {contact.address.substring(0, 10)}...{contact.address.substring(contact.address.length - 8)}
                 </p>
               </div>
             </div>

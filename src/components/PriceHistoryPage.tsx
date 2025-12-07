@@ -119,43 +119,50 @@ export const PriceHistoryPage = () => {
           </div>
 
           <div className="relative h-64 bg-muted/20 rounded-lg p-4">
-            <svg width="100%" height="100%" className="overflow-visible">
-              <defs>
-                <linearGradient id="priceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="rgb(34, 197, 94)" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              
-              {priceData.length > 1 && (
-                <>
-                  <polyline
-                    fill="url(#priceGradient)"
-                    stroke="none"
-                    points={priceData.map((d, i) => {
-                      const x = (i / (priceData.length - 1)) * 100;
-                      const y = ((maxPrice - d.price) / (maxPrice - minPrice)) * 80 + 10;
-                      return `${x}%,${y}%`;
-                    }).join(' ') + ` 100%,90% 0%,90%`}
-                  />
-                  <polyline
-                    fill="none"
-                    stroke="rgb(34, 197, 94)"
-                    strokeWidth="2"
-                    points={priceData.map((d, i) => {
-                      const x = (i / (priceData.length - 1)) * 100;
-                      const y = ((maxPrice - d.price) / (maxPrice - minPrice)) * 80 + 10;
-                      return `${x}%,${y}%`;
+            {priceData.length > 1 ? (
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" className="overflow-visible">
+                <defs>
+                  <linearGradient id={`priceGradient-${selectedCrypto}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="rgb(34, 197, 94)" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                
+                <polygon
+                  fill={`url(#priceGradient-${selectedCrypto})`}
+                  stroke="none"
+                  points={`
+                    ${priceData.map((d, i) => {
+                      const x = (i / (priceData.length - 1)) * 400;
+                      const y = ((maxPrice - d.price) / (maxPrice - minPrice || 1)) * 160 + 20;
+                      return `${x},${y}`;
                     }).join(' ')}
-                  />
-                </>
-              )}
-            </svg>
+                    400,180 0,180
+                  `}
+                />
+                <polyline
+                  fill="none"
+                  stroke="rgb(34, 197, 94)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  points={priceData.map((d, i) => {
+                    const x = (i / (priceData.length - 1)) * 400;
+                    const y = ((maxPrice - d.price) / (maxPrice - minPrice || 1)) * 160 + 20;
+                    return `${x},${y}`;
+                  }).join(' ')}
+                />
+              </svg>
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-foreground">
+                <Icon name="TrendingUp" size={48} className="opacity-30" />
+              </div>
+            )}
             
-            <div className="absolute top-2 left-4 text-xs text-muted-foreground">
+            <div className="absolute top-2 left-4 text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
               ${maxPrice.toLocaleString()}
             </div>
-            <div className="absolute bottom-2 left-4 text-xs text-muted-foreground">
+            <div className="absolute bottom-2 left-4 text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
               ${minPrice.toLocaleString()}
             </div>
           </div>
