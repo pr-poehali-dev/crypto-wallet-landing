@@ -20,7 +20,7 @@ const generateTransactions = (): Transaction[] => {
   const transactions: Transaction[] = [];
   const startDate = new Date('2025-03-06');
   const endDate = new Date('2025-11-11');
-  const currencies = ['USDC', 'BTC', 'ETH', 'BNB', 'SOL'];
+  const currencies = ['USDC'];
   
   const currentDate = new Date(startDate);
   let id = 1;
@@ -29,21 +29,9 @@ const generateTransactions = (): Transaction[] => {
     const numTransactions = Math.floor(Math.random() * 3) + 1;
     
     for (let i = 0; i < numTransactions; i++) {
-      const isReceive = Math.random() > 0.45;
-      const currency = currencies[Math.floor(Math.random() * currencies.length)];
-      
-      let amount: number;
-      if (currency === 'USDC') {
-        amount = Math.random() * 50000 + 1000;
-      } else if (currency === 'BTC') {
-        amount = Math.random() * 2 + 0.01;
-      } else if (currency === 'ETH') {
-        amount = Math.random() * 10 + 0.1;
-      } else if (currency === 'BNB') {
-        amount = Math.random() * 50 + 1;
-      } else {
-        amount = Math.random() * 100 + 5;
-      }
+      const isReceive = Math.random() > 0.48;
+      const currency = 'USDC';
+      const amount = Math.random() * 8000 + 500;
 
       transactions.push({
         id: `tx_${id.toString().padStart(4, '0')}`,

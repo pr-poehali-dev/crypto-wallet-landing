@@ -127,9 +127,14 @@ export const ExchangePage = () => {
                   className="flex-1 bg-muted/50"
                 />
               </div>
-              {prices[fromCurrency] && (
+              {prices[fromCurrency] && fromCurrency === 'USDC' && (
                 <p className="text-xs text-muted-foreground">
-                  Баланс: 196,446 {fromCurrency} ≈ ${(196446 * prices[fromCurrency].price).toLocaleString('ru-RU', { maximumFractionDigits: 2 })}
+                  Баланс: 246,818.42 {fromCurrency} ≈ ${(246818.42 * prices[fromCurrency].price).toLocaleString('ru-RU', { maximumFractionDigits: 2 })}
+                </p>
+              )}
+              {prices[fromCurrency] && fromCurrency !== 'USDC' && (
+                <p className="text-xs text-muted-foreground">
+                  Баланс: 0.00 {fromCurrency}
                 </p>
               )}
             </div>

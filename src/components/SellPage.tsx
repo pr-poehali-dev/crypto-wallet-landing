@@ -14,7 +14,7 @@ interface CryptoPrice {
 }
 
 export const SellPage = () => {
-  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
+  const [selectedCrypto, setSelectedCrypto] = useState('USDC');
   const [cryptoAmount, setCryptoAmount] = useState('');
   const [withdrawalMethod, setWithdrawalMethod] = useState('card');
   const [cardNumber, setCardNumber] = useState('');
@@ -22,11 +22,7 @@ export const SellPage = () => {
   const [prices, setPrices] = useState<Record<string, CryptoPrice>>({});
 
   const cryptos = [
-    { symbol: 'BTC', name: 'Bitcoin', icon: '₿', balance: '0.0234' },
-    { symbol: 'ETH', name: 'Ethereum', icon: 'Ξ', balance: '0.8421' },
-    { symbol: 'BNB', name: 'BNB', icon: '🔶', balance: '2.456' },
-    { symbol: 'SOL', name: 'Solana', icon: '◎', balance: '15.789' },
-    { symbol: 'USDC', name: 'USD Coin', icon: '💵', balance: '196446' },
+    { symbol: 'USDC', name: 'USD Coin', icon: '💵', balance: '246818.42' },
   ];
 
   const withdrawalMethods = [

@@ -106,9 +106,9 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
                   <Icon name="Coins" size={16} className="text-secondary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">5</div>
+                  <div className="text-2xl font-bold">1</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    USDC, BTC, ETH, BNB, SOL
+                    USDC
                   </p>
                 </CardContent>
               </Card>
