@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 
 interface Transaction {
@@ -68,6 +69,7 @@ export const TransactionHistory = () => {
   const [transactions] = useState<Transaction[]>(generateTransactions());
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'send' | 'receive'>('all');
+  const [dateFilter, setDateFilter] = useState<'all' | '7d' | '30d' | '90d'>('all');
 
   const filteredTransactions = transactions.filter((tx) => {
     const matchesSearch = 
@@ -77,7 +79,23 @@ export const TransactionHistory = () => {
     
     const matchesFilter = filterType === 'all' || tx.type === filterType;
     
-    return matchesSearch && matchesFilter;
+    const now = new Date('2025-11-11');
+    let matchesDate = true;
+    if (dateFilter === '7d') {
+      const sevenDaysAgo = new Date(now);
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      matchesDate = tx.date >= sevenDaysAgo;
+    } else if (dateFilter === '30d') {
+      const thirtyDaysAgo = new Date(now);
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      matchesDate = tx.date >= thirtyDaysAgo;
+    } else if (dateFilter === '90d') {
+      const ninetyDaysAgo = new Date(now);
+      ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+      matchesDate = tx.date >= ninetyDaysAgo;
+    }
+    
+    return matchesSearch && matchesFilter && matchesDate;
   });
 
   const totalSent = transactions
@@ -137,6 +155,17 @@ export const TransactionHistory = () => {
               История транзакций
             </CardTitle>
             <div className="flex items-center gap-2 w-full sm:w-auto">
+              <Select value={dateFilter} onValueChange={(value: any) => setDateFilter(value)}>
+                <SelectTrigger className="w-[140px] bg-muted/50 border-border">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Все время</SelectItem>
+                  <SelectItem value="7d">7 дней</SelectItem>
+                  <SelectItem value="30d">30 дней</SelectItem>
+                  <SelectItem value="90d">90 дней</SelectItem>
+                </SelectContent>
+              </Select>
               <Input
                 placeholder="Поиск..."
                 value={searchTerm}

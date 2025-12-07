@@ -40,7 +40,7 @@ export const CryptoChart = () => {
 
   const selectedData = cryptoData.find((c) => c.id === selectedCrypto);
 
-  const renderMiniChart = (sparkline: number[]) => {
+  const renderMiniChart = (sparkline: number[], isHoverable = false) => {
     if (!sparkline || sparkline.length === 0) return null;
 
     const max = Math.max(...sparkline);
@@ -60,13 +60,13 @@ export const CryptoChart = () => {
     const isPositive = sparkline[sparkline.length - 1] > sparkline[0];
 
     return (
-      <svg width={width} height={height} className="overflow-visible">
+      <svg width={width} height={height} className={`overflow-visible ${isHoverable ? 'group-hover:scale-105 transition-transform duration-300' : ''}`}>
         <polyline
           points={points}
           fill="none"
           stroke={isPositive ? 'rgb(34 197 94)' : 'rgb(239 68 68)'}
           strokeWidth="2"
-          className="transition-all"
+          className="transition-all duration-300 group-hover:stroke-[3]"
         />
       </svg>
     );
@@ -140,9 +140,9 @@ export const CryptoChart = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-lg bg-muted/30 border border-border/30">
+            <div className="p-4 rounded-lg bg-muted/30 border border-border/30 group hover:bg-muted/40 hover:border-primary/30 transition-all duration-300">
               <p className="text-xs text-muted-foreground mb-2">7 дней</p>
-              {renderMiniChart(selectedData.sparkline_in_7d.price)}
+              {renderMiniChart(selectedData.sparkline_in_7d.price, true)}
             </div>
           </div>
         )}
@@ -152,7 +152,7 @@ export const CryptoChart = () => {
           {cryptoData.map((crypto) => (
             <div
               key={crypto.id}
-              className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/30 transition-colors cursor-pointer"
+              className="group flex items-center justify-between p-3 rounded-lg hover:bg-muted/30 hover:border hover:border-primary/20 transition-all duration-300 cursor-pointer"
               onClick={() => setSelectedCrypto(crypto.id)}
             >
               <div className="flex items-center gap-3 flex-1">
@@ -169,7 +169,7 @@ export const CryptoChart = () => {
               
               <div className="flex items-center gap-4">
                 <div className="hidden sm:block">
-                  {renderMiniChart(crypto.sparkline_in_7d.price)}
+                  {renderMiniChart(crypto.sparkline_in_7d.price, true)}
                 </div>
                 <div className="text-right">
                   <p className="font-semibold text-sm">
