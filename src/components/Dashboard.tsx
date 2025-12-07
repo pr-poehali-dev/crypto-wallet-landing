@@ -365,14 +365,124 @@ export const Dashboard = ({ currentPage, onPageChange, isAccountFrozen, onFreeze
           </TabsContent>
 
           <TabsContent value="markets">
-            <Card className="border-border/50 bg-card/80 backdrop-blur">
-              <CardHeader>
-                <CardTitle>Рынки криптовалют</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CryptoChart />
-              </CardContent>
-            </Card>
+            <div className="space-y-4 sm:space-y-6">
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle>Рынки криптовалют</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CryptoChart />
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="TrendingUp" size={20} />
+                    Криптобиржи
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
+                    <a 
+                      href="https://www.binance.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white font-bold text-xl">
+                        B
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">Binance</p>
+                        <p className="text-xs text-muted-foreground">Крупнейшая биржа</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+
+                    <a 
+                      href="https://www.bybit.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white font-bold text-xl">
+                        BY
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">Bybit</p>
+                        <p className="text-xs text-muted-foreground">Деривативы и споты</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+
+                    <a 
+                      href="https://www.okx.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl">
+                        OK
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">OKX</p>
+                        <p className="text-xs text-muted-foreground">Web3 экосистема</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+
+                    <a 
+                      href="https://www.coinbase.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white font-bold text-xl">
+                        C
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">Coinbase</p>
+                        <p className="text-xs text-muted-foreground">Популярная в США</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+
+                    <a 
+                      href="https://www.kraken.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center text-white font-bold text-xl">
+                        K
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">Kraken</p>
+                        <p className="text-xs text-muted-foreground">Европейская биржа</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+
+                    <a 
+                      href="https://www.bitget.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl">
+                        BG
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold group-hover:text-primary transition-colors">Bitget</p>
+                        <p className="text-xs text-muted-foreground">Copy trading</p>
+                      </div>
+                      <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
         )}

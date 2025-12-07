@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 export const BalanceCard = () => {
@@ -64,14 +65,46 @@ export const BalanceCard = () => {
       </CardHeader>
       <CardContent className="space-y-3 sm:space-y-4">
         {isAccountFrozen && (
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-destructive/10 border border-destructive/30 mb-3">
-            <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
-              <Icon name="Lock" size={20} className="text-destructive" />
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-destructive/10 border border-destructive/30">
+              <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
+                <Icon name="Lock" size={20} className="text-destructive" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-destructive text-sm">Счет заморожен</p>
+                <p className="text-xs text-muted-foreground">Все операции заблокированы.</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-destructive text-sm">Счет заморожен</p>
-              <p className="text-xs text-muted-foreground">Все операции заблокированы. Для разморозки введите пароль.</p>
-            </div>
+            <Button 
+              onClick={() => {
+                const password = prompt('Введите пароль для разморозки:');
+                if (password) {
+                  const storedUsers = localStorage.getItem('users');
+                  let correctPassword = 'Lilia051181!';
+                  
+                  if (storedUsers) {
+                    const users = JSON.parse(storedUsers);
+                    const currentUser = users.find((u: { email: string }) => u.email === 'M.Kozlov@techglobal.ru');
+                    if (currentUser) {
+                      correctPassword = currentUser.password;
+                    }
+                  }
+
+                  if (password === correctPassword) {
+                    localStorage.setItem('accountFrozen', 'false');
+                    setIsAccountFrozen(false);
+                    alert('Счет разморожен');
+                    window.location.reload();
+                  } else {
+                    alert('Неверный пароль');
+                  }
+                }
+              }}
+              className="w-full bg-gradient-to-r from-primary to-secondary"
+            >
+              <Icon name="Unlock" size={18} className="mr-2" />
+              Разморозить счет
+            </Button>
           </div>
         )}
         <div className={isAccountFrozen ? 'opacity-50' : ''}>
