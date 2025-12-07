@@ -20,7 +20,7 @@ export const ContactsPage = () => {
   const [contacts, setContacts] = useState<Contact[]>([
     {
       id: 1,
-      name: 'Анна Петрова',
+      name: 'Listyuk',
       address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
       avatar: '👩‍💼',
       favorite: true,
@@ -29,7 +29,7 @@ export const ContactsPage = () => {
     },
     {
       id: 2,
-      name: 'Дмитрий Иванов',
+      name: 'Oliver Saddik',
       address: '0x8a9f2c1e4b7d3A51F8C2E9D6B4A7C1E3F5A8B2D4',
       avatar: '👨‍💻',
       favorite: true,
@@ -38,7 +38,7 @@ export const ContactsPage = () => {
     },
     {
       id: 3,
-      name: 'ООО "ТехГлобал"',
+      name: 'Olimp Ponds',
       address: '0x1c4e5f7a9b2d8c3e6f1a4b7d9c2e5f8a1b4d7c9e',
       avatar: '🏢',
       favorite: true,
