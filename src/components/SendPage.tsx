@@ -12,6 +12,11 @@ export const SendPage = () => {
   const [currency, setCurrency] = useState('USDC');
 
   const handleSend = () => {
+    const frozen = localStorage.getItem('accountFrozen');
+    if (frozen === 'true') {
+      alert('Счет заморожен. Операции невозможны.');
+      return;
+    }
     alert(`Отправка ${amount} ${currency} на адрес ${address}`);
   };
 

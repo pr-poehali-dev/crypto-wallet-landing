@@ -64,6 +64,11 @@ export const SellPage = () => {
   };
 
   const handleSell = () => {
+    const frozen = localStorage.getItem('accountFrozen');
+    if (frozen === 'true') {
+      alert('Счет заморожен. Операции невозможны.');
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

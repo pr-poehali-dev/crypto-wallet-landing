@@ -27,9 +27,11 @@ import type { Page } from '@/pages/Index';
 interface DashboardProps {
   currentPage: Page;
   onPageChange: (page: Page) => void;
+  isAccountFrozen: boolean;
+  onFreezeAccount: (freeze: boolean) => void;
 }
 
-export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
+export const Dashboard = ({ currentPage, onPageChange, isAccountFrozen, onFreezeAccount }: DashboardProps) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   return (
@@ -70,7 +72,7 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pb-20 sm:pb-24">
         {currentPage === 'send' && <SendPage />}
         {currentPage === 'receive' && <ReceivePage />}
-        {currentPage === 'settings' && <SettingsPage />}
+        {currentPage === 'settings' && <SettingsPage isAccountFrozen={isAccountFrozen} onFreezeAccount={onFreezeAccount} />}
         {currentPage === 'exchange' && <ExchangePage />}
         {currentPage === 'buy' && <BuyPage />}
         {currentPage === 'sell' && <SellPage />}

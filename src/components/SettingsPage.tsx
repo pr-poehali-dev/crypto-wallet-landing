@@ -13,7 +13,12 @@ interface User {
   name: string;
 }
 
-export const SettingsPage = () => {
+interface SettingsPageProps {
+  isAccountFrozen: boolean;
+  onFreezeAccount: (freeze: boolean) => void;
+}
+
+export const SettingsPage = ({ isAccountFrozen, onFreezeAccount }: SettingsPageProps) => {
   const [users, setUsers] = useState<User[]>([
     { id: '1', email: 'M.Kozlov@techglobal.ru', name: 'Максим Козлов' },
   ]);
@@ -113,6 +118,39 @@ export const SettingsPage = () => {
                   </p>
                 </div>
                 <Switch />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Управление счетом</h3>
+            <div className="space-y-4">
+              <div className="p-4 rounded-lg border-2 border-border bg-muted/20">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                      isAccountFrozen ? 'bg-destructive/20' : 'bg-primary/20'
+                    }`}>
+                      <Icon name={isAccountFrozen ? "Lock" : "Unlock"} size={20} className={isAccountFrozen ? 'text-destructive' : 'text-primary'} />
+                    </div>
+                    <div>
+                      <p className="font-medium">Заморозка счета</p>
+                      <p className="text-sm text-muted-foreground">
+                        {isAccountFrozen ? 'Счет заморожен. Все операции заблокированы.' : 'Заблокировать все операции по счету'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <Button 
+                  onClick={() => onFreezeAccount(!isAccountFrozen)}
+                  variant={isAccountFrozen ? "default" : "destructive"}
+                  className="w-full"
+                >
+                  <Icon name={isAccountFrozen ? "Unlock" : "Lock"} size={18} className="mr-2" />
+                  {isAccountFrozen ? 'Разморозить счет' : 'Заморозить счет'}
+                </Button>
               </div>
             </div>
           </div>
