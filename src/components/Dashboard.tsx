@@ -9,6 +9,9 @@ import { TransactionHistory } from '@/components/TransactionHistory';
 import { SendPage } from '@/components/SendPage';
 import { ReceivePage } from '@/components/ReceivePage';
 import { SettingsPage } from '@/components/SettingsPage';
+import { ExchangePage } from '@/components/ExchangePage';
+import { BuyPage } from '@/components/BuyPage';
+import { SellPage } from '@/components/SellPage';
 import type { Page } from '@/pages/Index';
 
 interface DashboardProps {
@@ -55,6 +58,9 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
         {currentPage === 'send' && <SendPage />}
         {currentPage === 'receive' && <ReceivePage />}
         {currentPage === 'settings' && <SettingsPage />}
+        {currentPage === 'exchange' && <ExchangePage />}
+        {currentPage === 'buy' && <BuyPage />}
+        {currentPage === 'sell' && <SellPage />}
         
         {currentPage === 'home' && (
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
@@ -125,20 +131,20 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
 
             <CryptoChart />
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Card className="border-border/50 bg-card/80 backdrop-blur">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Icon name="Send" size={20} />
-                    Быстрая отправка
+                    <Icon name="ArrowLeftRight" size={20} />
+                    Обмен
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Button 
-                    onClick={() => onPageChange('send')}
+                    onClick={() => onPageChange('exchange')}
                     className="w-full bg-gradient-to-r from-primary to-secondary"
                   >
-                    Отправить криптовалюту
+                    Обменять
                   </Button>
                 </CardContent>
               </Card>
@@ -146,17 +152,34 @@ export const Dashboard = ({ currentPage, onPageChange }: DashboardProps) => {
               <Card className="border-border/50 bg-card/80 backdrop-blur">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Icon name="Download" size={20} />
-                    Получить
+                    <Icon name="ShoppingCart" size={20} />
+                    Купить
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Button 
-                    onClick={() => onPageChange('receive')}
-                    variant="outline" 
-                    className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    onClick={() => onPageChange('buy')}
+                    className="w-full bg-gradient-to-r from-success to-secondary"
                   >
-                    Показать адрес кошелька
+                    Купить крипту
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/80 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Banknote" size={20} />
+                    Продать
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={() => onPageChange('sell')}
+                    variant="outline"
+                    className="w-full border-destructive text-destructive hover:bg-destructive hover:text-white"
+                  >
+                    Продать крипту
                   </Button>
                 </CardContent>
               </Card>
