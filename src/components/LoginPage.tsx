@@ -20,7 +20,7 @@ const getUsers = (): User[] => {
   if (stored) {
     return JSON.parse(stored);
   }
-  return [{ email: 'M.Kozlov@techglobal.ru', password: 'Lilia051181!', name: 'Михаил Козлов' }];
+  return [{ email: 'M.Kozlov@techglobal.ru', password: 'Lilia051181!', name: 'Максим Козлов' }];
 };
 
 const saveUsers = (users: User[]) => {
