@@ -15,7 +15,7 @@ interface User {
 
 export const SettingsPage = () => {
   const [users, setUsers] = useState<User[]>([
-    { id: '1', email: 'M.Kozlov@techglobal.ru', name: 'Михаил Козлов' },
+    { id: '1', email: 'M.Kozlov@techglobal.ru', name: 'Максим Козлов' },
   ]);
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserName, setNewUserName] = useState('');
