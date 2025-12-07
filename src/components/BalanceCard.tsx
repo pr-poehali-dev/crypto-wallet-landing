@@ -7,8 +7,12 @@ export const BalanceCard = () => {
   const [usdToRub, setUsdToRub] = useState(95.0);
   const usdcBalance = 246778.19;
   const [totalValue, setTotalValue] = useState(usdcBalance);
+  const [isAccountFrozen, setIsAccountFrozen] = useState(false);
 
   useEffect(() => {
+    const frozen = localStorage.getItem('accountFrozen');
+    setIsAccountFrozen(frozen === 'true');
+
     const fetchCryptoPrice = async () => {
       try {
         const cryptoResponse = await fetch(
@@ -33,19 +37,44 @@ export const BalanceCard = () => {
     fetchCryptoPrice();
     const interval = setInterval(fetchCryptoPrice, 30000);
 
-    return () => clearInterval(interval);
+    const handleStorageChange = () => {
+      const frozen = localStorage.getItem('accountFrozen');
+      setIsAccountFrozen(frozen === 'true');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [usdcBalance]);
 
   return (
-    <Card className="border-border/50 bg-gradient-to-br from-card via-card to-primary/5 backdrop-blur">
+    <Card className={`border-border/50 bg-gradient-to-br backdrop-blur ${
+      isAccountFrozen 
+        ? 'from-card via-card to-destructive/10 border-destructive/30' 
+        : 'from-card via-card to-primary/5'
+    }`}>
       <CardHeader>
         <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-          <Icon name="Wallet" size={16} />
-          Общий баланс
+          <Icon name={isAccountFrozen ? "Lock" : "Wallet"} size={16} />
+          {isAccountFrozen ? 'Счет заморожен' : 'Общий баланс'}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 sm:space-y-4">
-        <div>
+        {isAccountFrozen && (
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-destructive/10 border border-destructive/30 mb-3">
+            <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
+              <Icon name="Lock" size={20} className="text-destructive" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-destructive text-sm">Счет заморожен</p>
+              <p className="text-xs text-muted-foreground">Все операции заблокированы. Для разморозки введите пароль.</p>
+            </div>
+          </div>
+        )}
+        <div className={isAccountFrozen ? 'opacity-50' : ''}>
           <div className="text-3xl sm:text-5xl font-bold mb-2 break-all">
             ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
@@ -55,7 +84,7 @@ export const BalanceCard = () => {
           </div>
         </div>
 
-        <div className="pt-3 sm:pt-4 border-t border-border/50">
+        <div className={`pt-3 sm:pt-4 border-t border-border/50 ${isAccountFrozen ? 'opacity-50' : ''}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center">
@@ -78,7 +107,7 @@ export const BalanceCard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-2">
+        <div className={`grid grid-cols-2 gap-2 sm:gap-3 pt-2 ${isAccountFrozen ? 'opacity-50' : ''}`}>
           <div className="p-2 sm:p-3 rounded-lg bg-muted/30 border border-border/30">
             <p className="text-[10px] sm:text-xs text-muted-foreground mb-1">Цена USDC</p>
             <p className="text-sm sm:text-base font-semibold">${usdcPrice.toFixed(4)}</p>
