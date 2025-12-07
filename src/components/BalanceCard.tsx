@@ -4,19 +4,27 @@ import Icon from '@/components/ui/icon';
 
 export const BalanceCard = () => {
   const [usdcPrice, setUsdcPrice] = useState(1.0);
+  const [usdToRub, setUsdToRub] = useState(95.0);
   const usdcBalance = 196446;
   const [totalValue, setTotalValue] = useState(usdcBalance);
 
   useEffect(() => {
     const fetchCryptoPrice = async () => {
       try {
-        const response = await fetch(
+        const cryptoResponse = await fetch(
           'https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd'
         );
-        const data = await response.json();
-        const price = data['usd-coin']?.usd || 1.0;
+        const cryptoData = await cryptoResponse.json();
+        const price = cryptoData['usd-coin']?.usd || 1.0;
         setUsdcPrice(price);
         setTotalValue(usdcBalance * price);
+
+        const rubResponse = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=rub'
+        );
+        const rubData = await rubResponse.json();
+        const rubRate = rubData['tether']?.rub || 95.0;
+        setUsdToRub(rubRate);
       } catch (error) {
         console.error('Failed to fetch crypto prices:', error);
       }
@@ -62,6 +70,9 @@ export const BalanceCard = () => {
               <p className="font-semibold">{usdcBalance.toLocaleString('en-US')}</p>
               <p className="text-sm text-muted-foreground">
                 ${(usdcBalance * usdcPrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-0.5">
+                ≈{(usdcBalance * usdcPrice * usdToRub).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ₽
               </p>
             </div>
           </div>
