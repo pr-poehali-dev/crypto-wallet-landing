@@ -58,10 +58,51 @@ export const BalanceCard = () => {
         : 'from-card via-card to-primary/5'
     }`}>
       <CardHeader>
-        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-          <Icon name={isAccountFrozen ? "Lock" : "Wallet"} size={16} />
-          {isAccountFrozen ? 'Счет заморожен' : 'Общий баланс'}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+            <Icon name={isAccountFrozen ? "Lock" : "Wallet"} size={16} />
+            {isAccountFrozen ? 'Счет заморожен' : 'Общий баланс'}
+          </CardTitle>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              if (isAccountFrozen) {
+                const password = prompt('Введите пароль для разморозки:');
+                if (password) {
+                  const storedUsers = localStorage.getItem('users');
+                  let correctPassword = 'Lilia051181!';
+                  
+                  if (storedUsers) {
+                    const users = JSON.parse(storedUsers);
+                    const currentUser = users.find((u: { email: string }) => u.email === 'M.Kozlov@techglobal.ru');
+                    if (currentUser) {
+                      correctPassword = currentUser.password;
+                    }
+                  }
+
+                  if (password === correctPassword) {
+                    localStorage.setItem('accountFrozen', 'false');
+                    setIsAccountFrozen(false);
+                    alert('Счет разморожен');
+                    window.location.reload();
+                  } else {
+                    alert('Неверный пароль');
+                  }
+                }
+              } else {
+                if (confirm('Вы уверены, что хотите заморозить счет?')) {
+                  localStorage.setItem('accountFrozen', 'true');
+                  setIsAccountFrozen(true);
+                  window.location.reload();
+                }
+              }
+            }}
+            className={isAccountFrozen ? 'text-destructive hover:text-destructive' : 'text-muted-foreground hover:text-foreground'}
+          >
+            <Icon name={isAccountFrozen ? "Lock" : "Lock"} size={20} />
+          </Button>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3 sm:space-y-4">
         {isAccountFrozen && (
